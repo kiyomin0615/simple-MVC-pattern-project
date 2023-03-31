@@ -38,6 +38,21 @@ app.use(session({
 // 응답(response)에 토큰 추가
 app.use(csrf());
 
+app.use(function(req, res, next) {
+  const user = req.session.user;
+  const isAuthenticated = req.session.isAuthenticated;
+
+  if (!user || !isAuthenticated) {
+    next();
+    return;
+  }
+
+  // 로그인(인증) 상태라면
+  res.locals.isAuthenticated = isAuthenticated;
+
+  next();
+})
+
 app.use(blogRoutes);
 
 database.connectToDatabase().then(function() {

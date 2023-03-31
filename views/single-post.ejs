@@ -1,0 +1,14 @@
+<%- include("includes/head.ejs", { title: "View & Edit" }) %>
+<link rel="stylesheet" href="/css/forms.css">
+</head>
+
+<body>
+  <%- include("includes/header.ejs") %>
+  <main>
+    <%- include("includes/post-form", {
+      url: `/posts/${post._id}/edit`
+      post: post,
+      sessionInputData: sessionInputData
+    }) %>
+  </main>
+</body>

@@ -9,9 +9,23 @@
     <h1>블로그 포스트</h1>
     <section>
       <h2>새로운 포스트 작성</h2>
+      <%- include("includes/post-form", {
+        url: "/posts"
+        sessionInputData: sessionInputData
+      }) %>
     </section>
     <section>
       <h2>모든 블로그 포스트</h2>
+      <% if (!posts || posts.length === 0) { %>
+        <p>블로그 포스트를 찾을 수 없습니다.</p>
+      <% } else { %>
+        <ul id="posts-list">
+          <% for (let post of posts) { %>
+            <%- include("includes/post-item", {post: post}) %>
+          <% } %>
+        </ul>
+      <% } %>
     </section>
   </main>
 </body>
+</html>

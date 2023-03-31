@@ -1,0 +1,12 @@
+<li class="post-item">
+  <article>
+    <h3><%= post.title %>></h3>
+    <div class="actions">
+      <a class="btn" href="/posts/<%= post._id %>/edit">보기 & 편집하기</a>
+      <form action="/posts/<%= post._id%>/delete">
+        <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+        <button class="btn btn-alt">삭제하기</button>
+      </form>
+    </div>
+  </article>
+</li>

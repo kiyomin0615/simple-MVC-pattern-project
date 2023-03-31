@@ -1,0 +1,15 @@
+<form action="<%= url %>" method="POST">
+  <% if (sessionInputData.hasError) { %>
+    <p id="input-error"><%= sessionInputData.message %></p>
+  <% } %>
+  <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+  <div class="form-control">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" value="<%= sessionInputData.title %>" required>
+  </div>
+  <div class="form-control">
+    <label for="content">Content</label>
+    <textarea rows="6" id="content" name="content" value="<%= sessionInputData.content %>" required></textarea>
+  </div>
+  <button class="btn">작성</button>
+</form>
