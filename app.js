@@ -6,7 +6,8 @@ const mongodbStore = require("connect-mongodb-session"); // mongodbStore
 const csrf = require("csurf"); // crsf
 
 const database = require("./data/database"); // database.js
-const blogRoutes = require("./routes/blogRoutes"); // blog.js
+const blogRoutes = require("./routes/blogRoutes"); // blogRoutes.js
+const authRoutes = require(".routes/authRoutes"); // authRoutes.js
 
 // 몽고DB 세션 스토어 설정
 const MongoDBStore = mongodbStore(session);
@@ -29,11 +30,11 @@ app.use(session({
   secret: "this-is-secret",
   resave: false,
   saveUninitialized: false,
-  store: store, // 몽고DB 세션 스토어에 세션이 자동으로 저장된다
+  store: store,
   cookie: {
-    maxAge: 1000 * 60 * 60 // 60분의 유효기간
+    maxAge: 1000 * 60 * 60
   }
-}))
+}));
 
 // 응답(response)에 토큰 추가
 app.use(csrf());
@@ -54,6 +55,7 @@ app.use(function(req, res, next) {
 })
 
 app.use(blogRoutes);
+app.use(authRoutes);
 
 database.connectToDatabase().then(function() {
   app.listen(3000);
